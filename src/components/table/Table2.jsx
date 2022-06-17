@@ -1,10 +1,20 @@
 import axios from "axios";
+import moment from "moment";
 import { useState, useEffect } from "react";
 import BootstrapTable from "react-bootstrap-table-next";
 import paginationFactory from "react-bootstrap-table2-paginator";
 import cellEditFactory, { Type } from "react-bootstrap-table2-editor";
 import filterFactory, { textFilter } from "react-bootstrap-table2-filter";
-function App() {
+// import ToolkitProvider, { Search } from 'react-bootstrap-table2-toolkit';
+ 
+// const { SearchBar } = Search;
+
+
+// const { ExportCSVButton } = CSVExport;
+
+function App() 
+
+{
   const [data, setData] = useState([]);
   useEffect(() => {
     getData();
@@ -16,29 +26,22 @@ function App() {
       res.data.forEach((element,index) =>element.__id2=index);
     });
   };
-  const emailFormatter = (data, row) => {
-    return <span>Email = {data}</span>;
-  };
-  const selectRow = {
-    mode: "checkbox",
-    clickToSelect: true,
-    selected: [1, 3],
-    clickToEdit: true,
-  };
+
   const columns = [
     {
       dataField: "name",
       text: "Name",
-      sort: true,
+      // sort: true,
       filter: textFilter(),
       // formatter: emailFormatter,
+      editable: false,
     },
     {
       dataField: "rank",
-      text: "rank",
+      text: "Rank",
       filter: textFilter(),
-
-      sort: true,
+      editable: false,
+      // sort: true,
       validator: (newValue, row, column) => {
         if (isNaN(newValue)) {
           return {
@@ -52,41 +55,67 @@ function App() {
     {
       dataField: "number",
       text: "Number",
+      // sort: true,
+      editable: false,
+    },
+    {
+      dataField: "adharno",
+      text: "Aadhar Card ",
+      // sort: true,
+      editable: false,
+    },
+    {
+      dataField: "snumber",
+      text: "Snumber",
+      // sort: true,
+      editable: false,
+    },
+    {
+      dataField: "blacklist",
+      text: "Blacklist",
+      // sort: true,
+      editable: false,
+    }, {
+      dataField: "place",
+      text: "Place",
+      // sort: true,
+      editable: false,
+    }, {
+      dataField: "supervisor",
+      text: "Supervisor",
+      // sort: true,
+      editable: false,
+    },
+    {
+      dataField: "timein",
+      text: "Time In",
+      sort: true,
+      editable: false,
+    }, {
+      dataField: "datein",
+      text: "Date In",
+      sort: true,
+      editable: false,
+      // dataFormat:{dateFormatter}
+    },
+    {
+      dataField: "timeout",
+      text: "Time Out",
       sort: true,
       editable: false,
     },
     {
-      dataField: "datein",
-      text: "Datein",
-      // editor: {
-      //   type: Type.SELECT,
-      //   options: [
-      //     {
-      //       value: "A",
-      //       label: "A",
-      //     },
-      //     {
-      //       value: "B",
-      //       label: "B",
-      //     },
-      //   ],
-      // },
+      dataField: "dateout",
+      text: "Date Out",
+      sort: true,
+      editable: false,
+      // dataFormat:{dateFormatter}
+   
     },
   ];
-
-  const expandRow = {
-    onlyOneExpanding: true,
-    renderer: row => (
-      <div>
-        <p> {`This Expand row is belong to rowKey ${row.id2}`}</p>
-        <p>You can render anything here, also you can add additional data on every row object</p>
-        <p>expandRow.renderer callback will pass the origin row object to you</p>
-      </div>
-    )
-  };
-
   return (
     <div className="App">
+  
       <BootstrapTable
         keyField="id2"
         data={data}
@@ -102,9 +131,13 @@ function App() {
         })}
         // selectRow={selectRow}
         filter={filterFactory()}
-        expandRow={ expandRow }
+        // rowClasses={ rowClasses } 
+
+        
+        // expandRow={ expandRow }
 
       />
+       
     </div>
   );
 }
