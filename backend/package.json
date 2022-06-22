@@ -9,8 +9,9 @@
   },
   "dependencies": {
     "body-parser": "~1.0.1",
-    "cors": "2.8.1",
+    "cors": "^2.8.1",
     "express": "~4.0.0",
+    "mongoose": "^6.4.0",
     "mssql": "^6.2.1"
   },
   "devDependencies": {
